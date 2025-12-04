@@ -1,0 +1,6 @@
+# Ignore sensitif file
+koneksi.php
+
+# Ignore cache/temporary files (if any)
+*.log
+/vendor/
