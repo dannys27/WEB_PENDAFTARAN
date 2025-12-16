@@ -1,155 +1,330 @@
-body {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f4f7f6;
-  color: #333;
+/* Reset Dasar */
+* {
   margin: 0;
   padding: 0;
-  line-height: 1.6;
-}
-
-/* --- Container Utama --- */
-.container,
-.login-box,
-.register-box {
-  background: #ffffff;
-  padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-  margin: 50px auto;
-}
-.container {
-  max-width: 900px;
-}
-.login-box,
-.register-box {
-  width: 400px;
-}
-
-/* --- Typography and Headers --- */
-h1 {
-  color: #007bff;
-  text-align: center;
-  margin-bottom: 10px;
-  font-weight: 600;
-}
-h2 {
-  color: #555;
-  font-size: 1.2em;
-  text-align: center;
-  margin-bottom: 25px;
-}
-
-/* --- Forms and Inputs --- */
-label {
-  display: block;
-  margin-top: 15px;
-  font-weight: 500;
-  color: #555;
-}
-input[type="text"],
-input[type="password"],
-input[type="date"],
-textarea {
-  width: 100%;
-  padding: 10px;
-  margin-top: 5px;
-  border: 1px solid #ddd;
-  border-radius: 6px;
   box-sizing: border-box;
-  transition: border-color 0.3s;
-}
-input:focus,
-textarea:focus {
-  border-color: #007bff;
-  outline: none;
-  box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
+  font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
-/* --- Buttons --- */
-button,
-input[type="submit"] {
-  background-color: #28a745; /* Warna hijau untuk aksi utama */
+body {
+  background-color: #f0f2f5; /* Warna background abu-abu lebih lembut */
+  color: #333;
+}
+
+/* Layout Utama Dashboard */
+.dashboard-wrapper {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+}
+
+/* SIDEBAR (NAVIGASI KIRI) */
+.sidebar {
+  width: 260px;
+  background-color: #4b39b5; /* Ungu gelap sesuai referensi */
   color: white;
-  padding: 12px 20px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 1em;
+  flex-shrink: 0;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar h3 {
+  padding: 25px 20px;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.2);
+  font-size: 1.1rem;
   font-weight: 600;
-  margin-top: 20px;
-  transition: background-color 0.3s;
-}
-button:hover,
-input[type="submit"]:hover {
-  background-color: #218838;
+  letter-spacing: 1px;
 }
 
-/* --- Links and Navigation --- */
-a {
-  color: #007bff;
+.sidebar ul {
+  list-style: none;
+  margin-top: 15px;
+}
+
+.sidebar ul li a {
+  display: flex;
+  align-items: center;
+  padding: 15px 25px;
+  color: #dcdde1;
   text-decoration: none;
-  transition: color 0.3s;
-}
-a:hover {
-  color: #0056b3;
-  text-decoration: underline;
+  transition: all 0.3s ease;
+  font-size: 0.95rem;
 }
 
-/* --- Tables (daftar_siswa.php) --- */
+.sidebar ul li a:hover {
+  color: white;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding-left: 30px; /* Efek geser sedikit saat hover */
+}
+
+.sidebar ul li a.active {
+  background-color: rgba(255, 255, 255, 0.15);
+  color: white;
+  border-left: 5px solid #ffffff;
+  font-weight: bold;
+}
+
+/* KONTEN UTAMA (KANAN) */
+.main-content {
+  flex-grow: 1;
+  background-color: #f0f2f5;
+}
+
+/* TOPBAR */
+.topbar {
+  background: #ffffff;
+  padding: 0 30px;
+  height: 70px; /* Tinggi tetap agar rapi */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.breadcrumb {
+  color: #4b39b5;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.9rem;
+}
+
+/* AREA DASHBOARD CONTAINER */
+.dashboard-container {
+  padding: 30px;
+}
+
+.card-table {
+  background: white;
+  padding: 30px;
+  border-radius: 12px; /* Lebih membulat agar modern */
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+}
+
+.card-table h2 {
+  margin-bottom: 20px;
+  color: #2c3e50;
+  font-size: 1.4rem;
+}
+
+/* TABEL */
 table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 20px;
-}
-th,
-td {
-  padding: 12px;
-  text-align: left;
-  border-bottom: 1px solid #eee;
-}
-th {
-  background-color: #f8f9fa;
-  color: #333;
-  font-weight: 600;
-  border-top: 1px solid #ddd;
-}
-tr:hover {
-  background-color: #f1f1f1;
+  margin-top: 10px;
 }
 
-/* --- Aksi Links (CRUD) --- */
+table th {
+  background-color: #f8f9fa;
+  padding: 15px 12px;
+  text-align: left;
+  color: #636e72;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 2px solid #edf2f7;
+}
+
+table td {
+  padding: 15px 12px;
+  border-bottom: 1px solid #edf2f7;
+  font-size: 0.95rem;
+  color: #2d3436;
+  vertical-align: middle;
+}
+
+table tr:hover {
+  background-color: #fcfdfe; /* Highlight baris saat disentuh mouse */
+}
+
+/* TOMBOL AKSI */
 .aksi-link {
-  padding: 5px 10px;
-  border-radius: 4px;
-  font-size: 0.9em;
-  font-weight: 500;
+  padding: 8px 12px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   margin-right: 5px;
+  transition: 0.2s;
 }
+
 .edit {
-  background-color: #ffc107;
-  color: #333;
+  background: #ffc107;
+  color: #000;
 }
+.edit:hover {
+  background: #e5ac00;
+}
+
 .hapus {
-  background-color: #dc3545;
+  background: #dc3545;
   color: white;
 }
-
-/* --- Pesan Status --- */
-.success-msg {
-  color: green;
-  font-weight: bold;
-  margin-bottom: 15px;
-  background-color: #d4edda;
-  border: 1px solid #c3e6cb;
-  padding: 10px;
-  border-radius: 5px;
+.hapus:hover {
+  background: #c82333;
 }
-.error-msg {
-  color: red;
+
+/* PRINT SETTINGS */
+@media print {
+  /* 1. Sembunyikan elemen dashboard (sidebar, menu, tombol aksi) */
+  .sidebar,
+  .topbar,
+  .btn-print,
+  .aksi-kolom,
+  .breadcrumb,
+  .user-info {
+    display: none !important;
+  }
+
+  /* 2. Atur konten utama agar memenuhi seluruh halaman kertas */
+  .main-content {
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+
+  /* 3. Hilangkan background abu-abu dan bayangan kartu */
+  body {
+    background: white !important;
+  }
+
+  .dashboard-container {
+    padding: 0 !important;
+  }
+
+  .card-table {
+    box-shadow: none !important;
+    border: none !important;
+    padding: 0 !important;
+    width: 100% !important;
+  }
+
+  /* 4. Pastikan tabel terlihat jelas dengan garis hitam */
+  table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    margin-top: 20px;
+  }
+
+  table th,
+  table td {
+    border: 1px solid #000 !important; /* Garis hitam untuk print */
+    padding: 8px !important;
+    font-size: 12pt !important;
+    color: black !important;
+  }
+
+  /* Tambahkan judul khusus di atas tabel jika diperlukan */
+  .card-table h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+}
+
+.login-body {
+  background: linear-gradient(135deg, #4b39b5 0%, #7158e2 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+/* Kartu Login di tengah */
+.login-container {
+  background: white;
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.login-container h2 {
+  color: #4b39b5;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+/* Gaya Input Form Login */
+.form-group-login {
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.form-group-login label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #444;
+  font-size: 0.9rem;
+}
+
+.form-group-login input {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  outline: none;
+  transition: 0.3s;
+  font-size: 1rem;
+}
+
+.form-group-login input:focus {
+  border-color: #4b39b5;
+  box-shadow: 0 0 8px rgba(75, 57, 181, 0.2);
+}
+
+/* Tombol Login */
+.btn-login {
+  width: 100%;
+  padding: 12px;
+  background: #4b39b5;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
   font-weight: bold;
-  margin-bottom: 15px;
-  background-color: #f8d7da;
-  border: 1px solid #f5c6cb;
-  padding: 10px;
-  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+  margin-top: 10px;
+}
+
+.btn-login:hover {
+  background: #3a2a91;
+  transform: translateY(-2px);
+}
+
+/* Link di bawah form login */
+.login-footer {
+  margin-top: 25px;
+  font-size: 0.85rem;
+  color: #777;
+  border-top: 1px solid #eee;
+  padding-top: 20px;
+}
+
+.login-footer a {
+  color: #4b39b5;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.login-footer a:hover {
+  text-decoration: underline;
 }

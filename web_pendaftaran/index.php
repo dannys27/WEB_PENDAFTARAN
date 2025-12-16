@@ -1,6 +1,5 @@
 <?php
-session_start(); // Wajib di baris 1
-
+session_start();
 include 'koneksi.php';
 
 $error = "";
@@ -15,8 +14,9 @@ if (isset($_POST['login'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    // 1. Amankan input dan cari username
+    // Amankan input dan cari username
     $username = mysqli_real_escape_string($koneksi, $username);
+    // Pastikan nama tabel benar (tadi di screenshot terlihat 'user_admin')
     $query = "SELECT * FROM user_admin WHERE username = '$username'";
     $result = mysqli_query($koneksi, $query);
 
@@ -24,18 +24,14 @@ if (isset($_POST['login'])) {
         $row = mysqli_fetch_assoc($result);
         $hashed_password = $row['password'];
 
-        // 2. VERIFIKASI PASSWORD menggunakan fungsi aman password_verify()
+        // Verifikasi password
         if (password_verify($password, $hashed_password)) {
-
-            // 3. Login berhasil: buat Sesi
             $_SESSION['login'] = true;
             $_SESSION['username'] = $row['username'];
             $_SESSION['nama_lengkap'] = $row['nama_lengkap'];
 
-            // 4. Arahkan ke Halaman Admin
             header("Location: daftar_siswa.php");
             exit;
-
         } else {
             $error = "Username atau password salah!";
         }
@@ -49,53 +45,44 @@ if (isset($_POST['login'])) {
 
 <head>
     <meta charset="UTF-8">
-    <title>Login Admin SDN Kampung Bulak 4</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Admin - SDN Bulak 4</title>
     <link rel="stylesheet" href="assets/css/style.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-
-        .error {
-            font-weight: bold;
-        }
-
-        .login-box {
-            padding: 20px;
-            border: 1px solid #ccc;
-            width: 400px;
-            margin: 50px auto;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-    </style>
 </head>
 
-<body>
-    <div class="login-box">
-        <center>
-            <h1>Login Admin SDN Kampung Bulak 4</h1>
-            <?php if ($error != ""): ?>
-                <p class="error" style="color: red;"><?php echo $error; ?></p>
-            <?php endif; ?>
+<body class="login-body">
 
-            <form action="" method="POST">
-                <label for="username">Username:</label>
-                <input type="text" id="username" name="username" required><br><br>
+    <div class="login-container">
+        <h2>🏫 SDN Bulak 4</h2>
+        <p>Silakan login untuk mengelola data siswa</p>
 
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required><br><br>
+        <?php if ($error): ?>
+            <div
+                style="background: #ffe0e0; color: #e74c3c; padding: 10px; border-radius: 8px; margin-bottom: 15px; font-size: 0.85rem;">
+                ❌ <?= $error; ?>
+            </div>
+        <?php endif; ?>
 
-                <button type="submit" name="login">Login</button>
-            </form>
-            <hr>
+        <form action="" method="POST">
+            <div class="form-group-login">
+                <label>Username</label>
+                <input type="text" name="username" placeholder="Masukkan username Anda" required autofocus>
+            </div>
 
-            <p>Formulir pendaftaran untuk publik: <a href="form_pendaftaran.php">Klik di sini</a></p>
+            <div class="form-group-login">
+                <label>Password</label>
+                <input type="password" name="password" placeholder="Masukkan password Anda" required>
+            </div>
 
-            <p style="margin-top: 15px;">Belum ada akun Admin? <a href="register_admin.php">Buat Akun Admin Baru</a></p>
+            <button type="submit" name="login" class="btn-login">Masuk Sekarang</button>
+        </form>
 
-        </center>
+        <div class="login-footer">
+            <p>Formulir pendaftaran publik: <a href="form_pendaftaran.php">Klik di sini</a></p>
+            <p style="margin-top: 10px;">Belum punya akun? <a href="register_admin.php">Buat Akun Baru</a></p>
+        </div>
     </div>
+
 </body>
 
 </html>
